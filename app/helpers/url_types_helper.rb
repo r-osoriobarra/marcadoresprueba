@@ -1,0 +1,2 @@
+module UrlTypesHelper
+end

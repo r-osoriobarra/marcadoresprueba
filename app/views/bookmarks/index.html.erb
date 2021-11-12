@@ -1,0 +1,26 @@
+<h1>Soy index</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+        <th scope="col">name</th>
+        <th scope="col">Url</th>
+        <th scope="col">Type</th>
+        <th scope="col">Category</th>
+        <th scope="col" colspan="3"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @bookmarks.each do |b| %>
+                <td><%= b.name %></td>
+                <td><%= b.url %></td>
+                <td><%= b.url_type.name%></td>
+                <td><%= b.category.name%></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+
+<div>
+  <%= link_to 'Crear nuevo', new_bookmark_path, class: 'btn btn-primary'%>
+</div>

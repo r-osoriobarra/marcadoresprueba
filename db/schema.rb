@@ -10,12 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_11_233207) do
+ActiveRecord::Schema.define(version: 2021_11_11_233917) do
+
+  create_table "bookmarks", force: :cascade do |t|
+    t.string "name"
+    t.string "url"
+    t.integer "category_id"
+    t.integer "url_type_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_bookmarks_on_category_id"
+    t.index ["url_type_id"], name: "index_bookmarks_on_url_type_id"
+  end
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "category_id"
+    t.index ["category_id"], name: "index_categories_on_category_id"
   end
 
   create_table "url_types", force: :cascade do |t|
