@@ -1,55 +1,56 @@
 class UrlTypesController < ApplicationController
+
     def index
-        @categories = Category.all
+        @url_types = UrlType.all
     end
 
     def show
-        @category = Category.find(params[:id])
+        @url_type = UrlType.find(params[:id])
     end 
     
     def new
-        @category = Category.new
-        @categories = Category.all
+        @url_type = UrlType.new
+        @url_types = UrlType.all
     end
 
     def create
-        @category =  Category.new(category_params)
+        @url_type =  UrlType.new(url_type_params)
         respond_to do |format|
-            if @category.save
-                format.html { redirect_to categories_path, notice: 'Se ha creado la categoría!'}
+            if @url_type.save
+                format.html { redirect_to url_types_path, notice: 'Se ha creado un tipo!'}
             else
-                format.html { redirect_to categories_path, notice: 'No se ha creado la categoría'}        
+                format.html { redirect_to url_types_path, notice: 'No se ha creado un tipo'}        
             end
         end
     end
 
     def edit
-        @category = Category.find(params[:id])
-        @categories = Category.all
+        @url_type = UrlType.find(params[:id])
+        @url_types = UrlType.all
     end
     
     def update
-        @category = Category.find(params[:id])
+        @url_type = UrlType.find(params[:id])
         respond_to do |format|
-            if @category.update(category_params)
-                format.html { redirect_to categories_path, notice: 'Category se ha actualizado!' }
+            if @url_type.update(url_type_params)
+                format.html { redirect_to url_types_path, notice: 'Tipo se ha actualizado!' }
             else
-                format.html { redirect_to categories_path, notice: 'La categoría no se ha actualizado' }
+                format.html { redirect_to url_types_path, notice: 'El tipo no se ha actualizado' }
             end
         end
     end
 
     def destroy
-        @category = Category.find(params[:id])
-        @category.destroy
+        @url_type = UrlType.find(params[:id])
+        @url_type.destroy
         respond_to do |format|
-            format.html { redirect_to categories_path, notice: 'Se ha borrado al categoría' }
+            format.html { redirect_to url_types_path, notice: 'Se ha borrado el tipo' }
         end
     end    
     
     private
     
-    def category_params
-        params.require(:category).permit(:name, :category_id)
+    def url_type_params
+        params.require(:url_type).permit(:name)
     end
 end
