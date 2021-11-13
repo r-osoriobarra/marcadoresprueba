@@ -2,39 +2,30 @@ class BookmarksController < ApplicationController
 
     def index
         @bookmarks = Bookmark.all
+        @bookmark = Bookmark.new
     end
-
+    
     def new
         @bookmark = Bookmark.new
+        @categories = Category.all
+        @url_types = UrlType.all
     end
 
     def create
-        @bookmark = Bookmark.new(bookmarks_params)
+        @bookmark =  Bookmark.new(bookmarks_params)
         respond_to do |format|
-			if @bookmark.save
-                format.html {redirect_to root_path, notice: 'si se creo'}
+            if @bookmark.save
+                format.js { render nothing: true, notice: 'Se creó el bookmark!'}
             else
-                format.html {redirect_to root_path, notice: 'no se creo'}
-			end
-		end
-
-    end
-    
-    def destroy
-    end
-
-    def update
-        
-    end
-
-    def edit
-        
+                format.html { render nothing: true, notice: 'No se pudo crear el bookmark'}        
+            end
+        end
     end
 
     private
 
     def bookmarks_params
-        params.require(:bookmark).permit(:name, :url)
+        params.require(:bookmark).permit(:name, :url, :category_id, :url_type_id)
         
     end
 end
