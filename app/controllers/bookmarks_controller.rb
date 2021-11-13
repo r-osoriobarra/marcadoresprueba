@@ -4,6 +4,10 @@ class BookmarksController < ApplicationController
         @bookmarks = Bookmark.all
         @bookmark = Bookmark.new
     end
+
+    def show
+        @bookmark = Bookmark.find(params[:id])
+    end
     
     def new
         @bookmark = Bookmark.new
@@ -21,6 +25,32 @@ class BookmarksController < ApplicationController
             end
         end
     end
+
+    def edit
+        @bookmark = Bookmark.find(params[:id])
+        @bookmarks = Bookmark.all
+    end
+    
+    def update
+        @bookmark = Bookmark.find(params[:id])
+        respond_to do |format|
+            if @bookmark.update(bookmark_params)
+                format.js { render nothing: true, notice: 'El bookmakr se ha actualizado!' }
+            else
+                format.html { redirect_to bookmarks_path, notice: 'El bookmark no se ha actualizado' }
+            end
+        end
+    end
+
+    def destroy
+        @bookmark = Bookmark.find(params[:id])
+        @bookmark.destroy
+        respond_to do |format|
+            format.js { render nothing: true, notice: 'Se ha borrado el bookmark.' }
+        end
+    end    
+
+    
 
     private
 
