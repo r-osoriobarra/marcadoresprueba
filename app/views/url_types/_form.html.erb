@@ -1,0 +1,23 @@
+
+<%= form_with(model:@url_type , local: true) do |f| %>
+    <% if @url_type.errors.any? %>
+        <div id = 'error_explanation'>
+            <h2>Este type no se pudo crear por las siguientes razones</h2>
+            <ul>
+                <% @url_type.errors.full_messages.each do |msg|%>
+                    <li><%= msg %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+    <h1>New Type</h1>
+
+    <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: 'form-control'%>
+    </div>
+    
+    <div class = 'actions'>
+        <%= f.submit %>
+    </div>
+<% end %>
