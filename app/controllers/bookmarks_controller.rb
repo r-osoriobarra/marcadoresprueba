@@ -11,8 +11,8 @@ class BookmarksController < ApplicationController
     def create
         @bookmark = Bookmark.new(bookmarks_params)
         respond_to do |format|
-			if @bookmark.save!
-			    format.html {redirect_to root_path, notice: 'si se creo'}
+			if @bookmark.save
+                format.html {redirect_to root_path, notice: 'si se creo'}
             else
                 format.html {redirect_to root_path, notice: 'no se creo'}
 			end
