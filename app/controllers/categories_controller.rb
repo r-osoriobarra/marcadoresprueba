@@ -17,6 +17,7 @@ class CategoriesController < ApplicationController
         @category =  Category.new(category_params)
         respond_to do |format|
             if @category.save
+                @category.change_state
                 format.html { redirect_to categories_path, notice: 'Se ha creado la categoría!'}
             else
                 format.html { redirect_to categories_path, notice: 'No se ha creado la categoría'}        
@@ -33,6 +34,7 @@ class CategoriesController < ApplicationController
         @category = Category.find(params[:id])
         respond_to do |format|
             if @category.update(category_params)
+                @category.change_state
                 format.html { redirect_to categories_path, notice: 'Category se ha actualizado!' }
             else
                 format.html { redirect_to categories_path, notice: 'La categoría no se ha actualizado' }
@@ -51,6 +53,6 @@ class CategoriesController < ApplicationController
     private
     
     def category_params
-        params.require(:category).permit(:name, :category_id)
+        params.require(:category).permit(:name, :category_id, :public_state)
     end
 end
