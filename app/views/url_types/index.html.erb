@@ -1,27 +1,36 @@
 <div class="container pt-4">
+    <h1 id="logo"><svg xmlns="http://www.w3.org/2000/svg" width="70" height="100" fill="currentColor" class="bi bi-bookmark-plus-fill" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zm6.5-11a.5.5 0 0 0-1 0V6H6a.5.5 0 0 0 0 1h1.5v1.5a.5.5 0 0 0 1 0V7H10a.5.5 0 0 0 0-1H8.5V4.5z"/>
+    </svg></h1>
 
-<h1 id="logo"><svg xmlns="http://www.w3.org/2000/svg" width="70" height="100" fill="currentColor" class="bi bi-bookmark-plus-fill" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zm6.5-11a.5.5 0 0 0-1 0V6H6a.5.5 0 0 0 0 1h1.5v1.5a.5.5 0 0 0 1 0V7H10a.5.5 0 0 0 0-1H8.5V4.5z"/>
-</svg></h1>
-
-<table class="table ">
-    <thead class="thead-dark">
-        <tr>
-        <th scope="col">Name</th>
-        <th scope="col" colspan="3"></th>
-        </tr>
-    </thead>
-    <tbody>
-        <% @url_types.each do |u| %>
-                <td><%= u.name %></td>
-                <td><%= link_to 'Show', url_type_path(u) %></td>
-                <td><%= link_to 'Delete', url_type_path(u), method: :delete, data: {confirm: 'Estas seguro que necesitas borrar'} %></td>
+    <table class="table ">
+        <thead class="thead-dark">
+            <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nombre</th>
+            <th scope="col" colspan="3"></th>
             </tr>
-        <% end %>
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            <% @url_types.each do |c| %>
+                <tr>
+                    <td><%= c.id %></td>
+                    <td><%= c.name %></td>
+                    <td><%= link_to  'Ver', url_type_path(c) %></td>
+                    <td><%= link_to  'Editar', edit_url_type_path(c) %></td>
+                    <td><%= link_to  'Borrar', url_type_path(c), method: :delete, data: { confirm: 'Estas seguro que quieres borrar este tipo?'} %></td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
 
-<div>
-  <%= link_to 'Crear nuevo', new_url_type_path, class: 'btn btn-primary'%>
-</div>
+    <div>
+        <%= link_to 'Crear nuevo', new_url_type_path, class: 'btn btn-primary'%>
+    </div>
+
+    <%# pie chart %>
+    <div class="mt-4">
+        <h1>Bookmark's Type Chart</h1>
+        <%= pie_chart @bookmarks.group('url_type_id').count %>
+    </div>
 </div>
