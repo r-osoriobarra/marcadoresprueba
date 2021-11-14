@@ -1,0 +1,4 @@
+alert("Estas seguro que quieres agregar este bookmark?");
+$('#bookmark_table').append('<%= j render(@bookmark, b: @bookmark) %>');
+$('#bookmark_form').fadeOut(500);
+$('#new_bookmark_btn').show(500);

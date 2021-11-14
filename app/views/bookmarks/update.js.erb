@@ -1,0 +1,3 @@
+$("#bookmark_form").html(" ");
+$("#bookmark-<%=@bookmark.id%>").replaceWith('<%= j render(@bookmark, b: @bookmark)%>');
+$('#new_bookmark_btn').show();
