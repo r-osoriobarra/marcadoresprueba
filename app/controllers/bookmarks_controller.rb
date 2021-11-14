@@ -16,7 +16,7 @@ class BookmarksController < ApplicationController
     end
 
     def create
-        @bookmark =  Bookmark.new(bookmarks_params)
+        @bookmark =  Bookmark.new(bookmark_params)
         respond_to do |format|
             if @bookmark.save
                 format.js { render nothing: true, notice: 'Se creó el bookmark!'}
@@ -28,14 +28,15 @@ class BookmarksController < ApplicationController
 
     def edit
         @bookmark = Bookmark.find(params[:id])
-        @bookmarks = Bookmark.all
+        @categories = Category.all
+        @url_types = UrlType.all
     end
     
     def update
         @bookmark = Bookmark.find(params[:id])
         respond_to do |format|
             if @bookmark.update(bookmark_params)
-                format.js { render nothing: true, notice: 'El bookmakr se ha actualizado!' }
+                format.js { render nothing: true, notice: 'El bookmark se ha actualizado!' }
             else
                 format.html { redirect_to bookmarks_path, notice: 'El bookmark no se ha actualizado' }
             end
@@ -50,11 +51,9 @@ class BookmarksController < ApplicationController
         end
     end    
 
-    
-
     private
 
-    def bookmarks_params
+    def bookmark_params
         params.require(:bookmark).permit(:name, :url, :category_id, :url_type_id)
         
     end
