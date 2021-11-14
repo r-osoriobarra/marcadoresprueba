@@ -2,6 +2,7 @@ class UrlTypesController < ApplicationController
 
     def index
         @url_types = UrlType.all
+        @bookmarks = Bookmark.all
     end
 
     def show

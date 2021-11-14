@@ -27,4 +27,10 @@
     <div>
         <%= link_to 'Crear nuevo', new_url_type_path, class: 'btn btn-primary'%>
     </div>
+
+    <%# pie chart %>
+    <div class="mt-4">
+        <h1>Bookmark's Type Chart</h1>
+        <%= pie_chart @bookmarks.group('url_type_id').count %>
+    </div>
 </div>
